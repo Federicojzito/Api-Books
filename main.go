@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
@@ -40,3 +41,9 @@ type Book struct {
 
 //Variable, Inicializar Books
 var books []Book
+
+//Funcion para Obtener todos los Libros
+func getBooks(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(books)
+}
