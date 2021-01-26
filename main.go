@@ -14,6 +14,12 @@ func main() {
 	// Iniciando Routers
 	r := mux.NewRouter()
 
+	//Agregando base de datos interna
+	books = append(books, Book{ID: "1", Isbn: "123456", Title: "It", Author: &Author{Firstname: "Stephen", Lastname: "King"}})
+	books = append(books, Book{ID: "2", Isbn: "789456", Title: "Star wars ", Author: &Author{Firstname: "George ", Lastname: "Lucas"}})
+	books = append(books, Book{ID: "3", Isbn: "987456", Title: "Star Trek", Author: &Author{Firstname: "Gene", Lastname: "Roddenberry"}})
+	books = append(books, Book{ID: "4", Isbn: "321456", Title: "Alien: el octavo pasajero", Author: &Author{Firstname: "Ridley", Lastname: "Scott"}})
+
 	// Handlers y endpoints
 	r.HandleFunc("/books", getBooks).Methods("GET")
 	r.HandleFunc("/books/{id}", getBook).Methods("GET")
@@ -24,27 +30,21 @@ func main() {
 	// Iniciando Servidor
 	log.Fatal(http.ListenAndServe(":8000", r))
 
-	//Agregando base de datos interna
-	books = append(books, Book{ID: "1", Isbn: "123456", Title: "It", Author: &Author{Firstname: "Stephen", Lastname: "King"}})
-	books = append(books, Book{ID: "2", Isbn: "789456", Title: "Star wars ", Author: &Author{Firstname: "George ", Lastname: "Lucas"}})
-	books = append(books, Book{ID: "3", Isbn: "987456", Title: "Star Trek", Author: &Author{Firstname: "Gene", Lastname: "Roddenberry"}})
-	books = append(books, Book{ID: "4", Isbn: "321456", Title: "Alien: el octavo pasajero", Author: &Author{Firstname: "Ridley", Lastname: "Scott"}})
 }
 
 // Agregando Estructuras
-
 // Autor Estructura
 type Author struct {
-	Firstname string `json:"nombre"`
-	Lastname  string `json:"apellido"`
+	Firstname string `json:"Firstname"` //nombre
+	Lastname  string `json:"Lastname"`  //apellido
 }
 
 // Libros Estructura (modelos)
 type Book struct {
-	ID     string  `json:"id"`
-	Isbn   string  `json:"identificador único para libros"`
-	Title  string  `json:"titulo"`
-	Author *Author `json:"autor"`
+	ID     string  `json:"id"`     //id identificador
+	Isbn   string  `json:"isbn"`   //Identificador unico para libros
+	Title  string  `json:"title"`  //titulo
+	Author *Author `json:"author"` //autor
 }
 
 //Variable, Inicializar Books
@@ -113,9 +113,9 @@ func deleteBook(w http.ResponseWriter, r *http.Request) {
 // Request Simple
 // {
 //	"id" : "5",
-// 	"identificador único para libros":"123456",
+// 	"isbn único para libros":"123456",
 // 	"title":"El señor de los Anillos",
-// 	"author":{"nombre":"J. R. R",
-//            "apellido":"Tolkien"
+// 	"author":{"firstname":"J. R. R",
+//            "lastname":"Tolkien"
 //			 }
 // }
