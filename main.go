@@ -21,3 +21,22 @@ func main() {
 	// Iniciando Servidor
 	log.Fatal(http.ListenAndServe(":8000", r))
 }
+
+// Agregando Estructuras
+
+// Autor Estructura
+type Author struct {
+	Firstname string `json:"nombre"`
+	Lastname  string `json:"apellido"`
+}
+
+// Libros Estructura (modelos)
+type Book struct {
+	ID     string  `json:"id"`
+	Isbn   string  `json:"identificador único para libros"`
+	Title  string  `json:"titulo"`
+	Author *Author `json:"autor"`
+}
+
+//Variable, Inicializar Books
+var books []Book
