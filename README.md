@@ -13,6 +13,12 @@ go build
 ./api-books
 ```
 
+``` bash
+
+http://localhost:8000/books
+
+```
+
 ## Endpoints
 Atravez del Postman
 
