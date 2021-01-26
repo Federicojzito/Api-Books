@@ -47,3 +47,17 @@ func getBooks(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(books)
 }
+
+//Funcion para Obtener un Solo libro
+func getBook(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r) // Gets params
+	// Recorre los libros y encuentra uno con la identificación de los parámetros
+	for _, item := range books {
+		if item.ID == params["id"] {
+			json.NewEncoder(w).Encode(item)
+			return
+		}
+	}
+	json.NewEncoder(w).Encode(&Book{})
+}
